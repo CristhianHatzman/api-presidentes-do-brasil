@@ -9,7 +9,7 @@ app.use(Express.urlencoded({ extended: true }));
 import President from "./models/President.js";
 import PresidentRouter from "./routes/PresidentRouter.js";
 
-app.use("/", PresidentRouter);
+app.use("/presidents", PresidentRouter);
 
 const PORT = 3500;
 app.listen(PORT, (error) => {
