@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: API de Presidentes
+  description: Uma API para gerenciar informações de presidentes.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor de Desenvolvimento Local
+
+tags:
+  - name: Presidentes
+    description: Operações relacionadas a presidentes.
+
+paths:
+  /presidents:
+    get:
+      summary: Buscar todos os presidentes
+      description: Retorna uma lista de todos os presidentes cadastrados.
+      tags:
+        - Presidentes
+      responses:
+        '200':
+          description: OK. Uma lista de presidentes retornada com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  presidents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/President'
+        '500':
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      summary: Criar novo presidente
+      description: Cria um novo registro de presidente no banco de dados.
+      tags:
+        - Presidentes
+      requestBody:
+        description: Dados do presidente a ser criado.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PresidentInput'
+      responses:
+        '201':
+          description: Created. Presidente criado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Presidente criado com sucesso!"
+        '500':
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /presidents/{id}:
+    get:
+      summary: Buscar presidente por ID
+      description: Retorna um único presidente com base em seu ID.
+      tags:
+        - Presidentes
+      parameters:
+        - name: id
+          in: path
+          description: O ID do presidente a ser buscado.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK. Presidente encontrado e retornado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  president:
+                    $ref: '#/components/schemas/President'
+        '400':
+          description: ID inválido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Presidente não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      summary: Atualizar presidente
+      description: Atualiza os dados de um presidente existente com base em seu ID.
+      tags:
+        - Presidentes
+      parameters:
+        - name: id
+          in: path
+          description: O ID do presidente a ser atualizado.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Dados do presidente a serem atualizados.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PresidentInput'
+      responses:
+        '200':
+          description: OK. Presidente atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Presidente atualizado com sucesso!"
+        '400':
+          description: ID inválido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Presidente não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Deletar presidente
+      description: Deleta um presidente do banco de dados com base em seu ID.
+      tags:
+        - Presidentes
+      parameters:
+        - name: id
+          in: path
+          description: O ID do presidente a ser deletado.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK. Presidente deletado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Presidente deletado com sucesso!"
+        '400':
+          description: ID inválido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Presidente não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    President:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '60c72b2f9b1d8c1e2f3a4b5c'
+        name:
+          type: string
+          example: 'João da Silva'
+        birthDate:
+          type: string
+          format: date
+          example: '1900-01-01'
+        deathDate:
+          type: string
+          format: date
+          example: '1970-01-01'
+        birthPlace:
+          type: string
+          example: 'Rio de Janeiro, Brasil'
+        profession:
+          type: string
+          example: 'Advogado'
+        mandates:
+          type: array
+          items:
+            type: object
+            properties:
+              termStart:
+                type: string
+                format: date
+                example: '1950-01-31'
+              termEnd:
+                type: string
+                format: date
+                example: '1955-01-31'
+        biography:
+          type: string
+          example: 'Uma breve biografia do presidente...'
+        imageUrl:
+          type: string
+          format: url
+          example: 'https://exemplo.com/joao.jpg'
+        curiosities:
+          type: array
+          items:
+            type: string
+            example: 'Era conhecido por seu chapéu.'
+
+    PresidentInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'João da Silva'
+        birthDate:
+          type: string
+          format: date
+          example: '1900-01-01'
+        deathDate:
+          type: string
+          format: date
+          example: '1970-01-01'
+        birthPlace:
+          type: string
+          example: 'Rio de Janeiro, Brasil'
+        profession:
+          type: string
+          example: 'Advogado'
+        mandates:
+          type: array
+          items:
+            type: object
+            properties:
+              termStart:
+                type: string
+                format: date
+                example: '1950-01-31'
+              termEnd:
+                type: string
+                format: date
+                example: '1955-01-31'
+        biography:
+          type: string
+          example: 'Uma breve biografia do presidente...'
+        imageUrl:
+          type: string
+          format: url
+          example: 'https://exemplo.com/joao.jpg'
+        curiosities:
+          type: array
+          items:
+            type: string
+            example: 'Era conhecido por seu chapéu.'
+      required:
+        - name
+        - birthDate
+        - profession
+        - mandates
+        - biography
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Erro interno no servidor."
