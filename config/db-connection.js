@@ -4,7 +4,7 @@ const dbPassword = "UvaRoxa2504";
 
 const connect = () => {
   mongoose.connect(
-    `mongodb+srv://cristhianfatec:${dbPassword}@cluster0.crswihy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+    `mongodb+srv://cristhianfatec:${dbPassword}@cluster0.crswihy.mongodb.net/api-presidents?retryWrites=true&w=majority&appName=Cluster0`
   );
   const connection = mongoose.connection;
 
