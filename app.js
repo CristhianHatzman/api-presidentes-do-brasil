@@ -1,3 +1,6 @@
+import swaggerUi from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
+import swaggerOptions from "./config/swagger-config.js";
 import Express from "express";
 const app = Express();
 
@@ -5,6 +8,11 @@ import mongoose from "./config/db-connection.js";
 
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
+
+//Gera a documentação da API
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+//Configura rota para acessar a documentação
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 import President from "./models/President.js";
 import PresidentRouter from "./routes/PresidentRouter.js";
