@@ -4,27 +4,27 @@ import PresidentsController from "../controllers/presidentController.js";
 import Auth from "../middleware/Auth.js";
 
 PresidentRouter.get(
-  "/ver",
+  "/view",
   Auth.Authorization,
   PresidentsController.getAllPresidents
 );
 PresidentRouter.post(
-  "/adiciona",
+  "/insert",
   Auth.Authorization,
   PresidentsController.createPresident
 );
 PresidentRouter.delete(
-  "/delete/:id",
+  "/drop/:id",
   Auth.Authorization,
   PresidentsController.deletePresident
 );
 PresidentRouter.put(
-  "/altera/:id",
+  "/alter/:id",
   Auth.Authorization,
   PresidentsController.updatePresident
 );
 PresidentRouter.get(
-  "/ver/:id",
+  "/view/:id",
   Auth.Authorization,
   PresidentsController.getOnePresident
 );

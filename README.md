@@ -43,12 +43,12 @@ API REST desenvolvida em **Node.js** com **Express.js**, organizada em **arquite
 ## 📌 Endpoints da API
 
 ### 🔑 Autenticação de Usuário
-- `POST /login/register` → Registro de um novo usuário  
-- `POST /login/login` → Login de usuário e geração de token JWT  
+- `POST /user/register` → Registro de um novo usuário  
+- `POST /user/login` → Login de usuário e geração de token JWT  
 
 ### 🗂️ Presidentes (Protegido por JWT)
-- `GET /presidents/ver` → Listar todos os presidentes  
-- `GET /presidents/ver/:id` → Buscar presidente por ID  
-- `POST /presidents/adiciona` → Adição de presidente no sistema  
-- `PUT /presidents/altera/:id` → Alterar presidente por ID  
-- `DELETE /presidents/delete/:id` → Deletar presidente por ID  
+- `GET /presidents/view` → Listar todos os presidentes  
+- `GET /presidents/view/:id` → Buscar presidente por ID  
+- `POST /presidents/insert` → Adição de presidente no sistema  
+- `PUT /presidents/alter/:id` → Alterar presidente por ID  
+- `DELETE /presidents/drop/:id` → Deletar presidente por ID  

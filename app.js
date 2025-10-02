@@ -19,7 +19,7 @@ import PresidentRouter from "./routes/PresidentRouter.js";
 import UserRouter from "./routes/UserRouter.js";
 
 app.use("/presidents", PresidentRouter);
-app.use("/login", UserRouter);
+app.use("/user", UserRouter);
 
 const PORT = 3500;
 app.listen(PORT, (error) => {
