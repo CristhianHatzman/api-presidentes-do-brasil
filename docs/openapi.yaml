@@ -15,7 +15,7 @@ tags:
     description: Operações relacionadas a usuários e autenticação.
 
 paths:
-  /login/register:
+  /user/register:
     post:
       summary: Registrar novo usuário
       description: Cria um novo usuário no sistema.
@@ -69,7 +69,7 @@ paths:
                     type: string
                     example: "Erro interno no servidor."
 
-  /login/login:
+  /user/login:
     post:
       summary: Login de usuário
       description: Autentica um usuário e retorna um token JWT.
@@ -145,7 +145,7 @@ paths:
                     type: string
                     example: "Erro interno no servidor."
 
-  /presidents/ver:
+  /presidents/view:
     get:
       summary: Buscar todos os presidentes
       description: Retorna uma lista de todos os presidentes cadastrados.
@@ -186,7 +186,7 @@ paths:
                     type: string
                     example: "Erro interno no servidor."
 
-  /presidents/adiciona:
+  /presidents/insert:
     post:
       summary: Criar novo presidente
       description: Cria um novo registro de presidente no banco de dados.
@@ -271,7 +271,7 @@ paths:
                     type: string
                     example: "Erro interno no servidor."
 
-  /presidents/ver/{id}:
+  /presidents/view/{id}:
     get:
       summary: Buscar presidente por ID
       description: Retorna um único presidente com base em seu ID.
@@ -337,7 +337,7 @@ paths:
                     type: string
                     example: "Erro interno no servidor."
 
-  /presidents/altera/{id}:
+  /presidents/alter/{id}:
     put:
       summary: Atualizar presidente
       description: Atualiza os dados de um presidente existente com base em seu ID.
@@ -449,7 +449,7 @@ paths:
                     type: string
                     example: "Erro interno no servidor."
 
-  /presidents/delete/{id}:
+  /presidents/drop/{id}:
     delete:
       summary: Deletar presidente
       description: Deleta um presidente do banco de dados com base em seu ID.
